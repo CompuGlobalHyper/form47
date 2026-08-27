@@ -1,5 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
-from app.processing.ocr import extract_text_from_pdf
+from app.processing.pdf import extract_pdf
 
 app = FastAPI()
 
@@ -11,9 +11,9 @@ def health_check():
 async def extract_form(file: UploadFile = File(...)):
     contents = await file.read()
 
-    pages = extract_text_from_pdf(contents)
+    result = extract_pdf(contents)
 
     return {
         "filename": file.filename,
-        "page": pages
+        "result": result
     }
