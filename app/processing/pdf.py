@@ -50,10 +50,29 @@ def extract_form_fields(document):
     return fields
 
 def extract_with_ocr(page):
-    pixmap = page.get_pixmap(dpi=300)
+    pixmap = page.get_pixmap(dpi=400)
     
     image = Image.open(
         BytesIO(pixmap.tobytes("png"))
     )
 
-    return pytesseract.image_to_string(image).strip()
+    rawData = pytesseract.image_to_data(
+        image,
+        config="--psm 6",
+        output_type=pytesseract.Output.DICT
+    )
+
+    data = []
+
+    for i, text in enumerate(rawData["text"]):
+        if text.strip():
+            data.append({
+                "text": text,
+                "x": rawData["left"][i],
+                "y": rawData["top"][i],
+                "width": rawData["width"][i],
+                "height": rawData["height"][i],
+                "confidence": rawData["conf"][i]
+            })
+
+    return data
