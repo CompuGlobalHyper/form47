@@ -19,11 +19,15 @@ Jinja2==3.1.6
 markdown-it-py==4.2.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
+packaging==26.3
+pillow==12.3.0
 pydantic==2.13.4
 pydantic-extra-types==2.11.1
 pydantic-settings==2.15.0
 pydantic_core==2.46.4
 Pygments==2.21.0
+pymupdf==1.28.2
+pytesseract==0.3.13
 python-dotenv==1.2.3
 python-multipart==0.0.32
 PyYAML==6.0.3
